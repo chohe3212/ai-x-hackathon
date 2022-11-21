@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <FrameLayout
         android:id="@+id/frameLayout_main"
         android:layout_width="match_parent"
@@ -14,10 +15,24 @@
         app:layout_constraintRight_toRightOf="parent"
         >
 
+
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </FrameLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F8F5EC"
+        android:textStyle="bold"
+        app:itemIconTint="@drawable/menu_selector"
+        app:itemTextColor="#4B5E52"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:menu="@menu/menu_bottomnavigationview" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

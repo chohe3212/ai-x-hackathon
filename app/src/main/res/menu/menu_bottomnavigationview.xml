@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/LocationIcon"
+        android:icon="@drawable/location"
+        android:title="Location" />
+
+    <item
+        android:id="@+id/MapIcon"
+        android:icon="@drawable/map"
+        android:title="Map"
+        android:checked="true"/>
+    <item
+        android:id="@+id/RankIcon"
+        android:icon="@drawable/ranking"
+        android:title="Ranking"
+/>
+
+</menu>
