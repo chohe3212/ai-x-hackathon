@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     InfoFragment infoFragment = new InfoFragment();
     StoreFragment storeFragment = new StoreFragment();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
