@@ -11,12 +11,14 @@ import android.view.View;
 
 import net.daum.android.map.MapViewEventListener;
 import net.daum.android.map.MapViewTouchEventListener;
+import net.daum.mf.map.api.CalloutBalloonAdapter;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapPolyline;
 import net.daum.mf.map.api.MapReverseGeoCoder;
 import net.daum.mf.map.api.MapView;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -29,6 +31,26 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
 
     public TextView address_text;
 
+    // 커스텀 마커 풍선
+    class CustomCalloutBalloonAdapter implements CalloutBalloonAdapter {
+        private final View mCalloutBalloon;
+
+        public CustomCalloutBalloonAdapter() {
+            mCalloutBalloon = getLayoutInflater().inflate(R.layout.custom_callout_balloon, null);
+        }
+
+        @Override
+        public View getCalloutBalloon(MapPOIItem poiItem) {
+            ((TextView) mCalloutBalloon.findViewById(R.id.ball_tv_name)).setText(poiItem.getItemName());
+            ((TextView) mCalloutBalloon.findViewById(R.id.ball_tv_address)).setText("Custom CalloutBalloon");
+            return (View)mCalloutBalloon;
+        }
+
+        @Override
+        public View getPressedCalloutBalloon(MapPOIItem poiItem) {
+            return null;
+        }
+    }
 
 
     @Override
@@ -43,39 +65,13 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         ViewGroup mapViewContainer = (ViewGroup) v.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView1);
         mapView1.setMapViewEventListener(this);
-
-        /*지도 중심점,레벨(zoom) 변경*/
+        mapView1.setCalloutBalloonAdapter( new CustomCalloutBalloonAdapter());
 
         // 중심점 변경 - 북촌로 5가길
         mapView1.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.579324, 126.984503), true);
-        // 줌 레벨 변경
-        mapView1.setZoomLevel(2, true);
-        // 줌 인
+        mapView1.setZoomLevel(2, true); // 줌 레벨 변경
         mapView1.zoomIn(true);
-        // 줌 아웃
         mapView1.zoomOut(true);
-
-        /*마커 추가*/
-        /*좌표 firebase에서 가져오기*/
-
-        //마커 찍기 (북촌로 5가길)
-        //MapPoint MARKER_POINT1 = MapPoint.mapPointWithScreenLocation(0.000, 0.000);
-        MapPoint MARKER_POINT1 = MapPoint.mapPointWithGeoCoord(37.580634, 126.981815);
-
-        // 마커 아이콘 추가하는 함수
-        MapPOIItem marker1 = new MapPOIItem();
-        // 클릭 했을 때 나오는 호출 값
-        marker1.setItemName("북촌로 5가길");
-        // 왜 있는지 잘 모르겠음
-        marker1.setTag(0);
-        // 좌표를 입력받아 현 위치로 출력
-        marker1.setMapPoint(MARKER_POINT1);
-        //  (클릭 전)기본으로 제공하는 BluePin 마커 모양의 색.
-        marker1.setMarkerType(MapPOIItem.MarkerType.BluePin);
-        // (클릭 후) 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-        marker1.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
-        // 지도화면 위에 추가되는 아이콘을 추가하기 위한 호출(말풍선 모양)
-        mapView1.addPOIItem(marker1);
 
 
         // polyline1 그리기 ( 북촌로5가길 )
@@ -90,6 +86,18 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         // Polyline 지도에 올리기.
         mapView1.addPolyline(polyline1);
 
+        // marker1 추가하기 ( 북촌로 5가길 )
+        MapPoint MARKER_POINT1 = MapPoint.mapPointWithGeoCoord(37.581444, 126.981217);
+
+        MapPOIItem marker1 = new MapPOIItem();
+        marker1.setItemName("북촌로 5가길");
+        marker1.setTag(0);
+        marker1.setMapPoint(MARKER_POINT1);
+        marker1.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+        marker1.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+
+        mapView1.addPOIItem(marker1);
+
         // polyline2 그리기 ( 계동길 )
         MapPolyline polyline2 = new MapPolyline();
         polyline2.setTag(1001);
@@ -99,9 +107,21 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         polyline2.addPoint(MapPoint.mapPointWithGeoCoord(37.580236, 126.986736));
         polyline2.addPoint(MapPoint.mapPointWithGeoCoord(37.577503, 126.986773));
         polyline2.addPoint(MapPoint.mapPointWithGeoCoord(37.577277, 126.986822));
-
         // Polyline 지도에 올리기.
         mapView1.addPolyline(polyline2);
+
+        // marker2 추가하기 ( 계동길 )
+        MapPoint MARKER_POINT2 = MapPoint.mapPointWithGeoCoord(37.582880, 126.986843);
+
+        MapPOIItem marker2 = new MapPOIItem();
+        marker2.setItemName("계동길");
+        marker2.setTag(1);
+        marker2.setMapPoint(MARKER_POINT2);
+        marker2.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+        marker2.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+
+        mapView1.addPOIItem(marker2);
+
 
         // polyline3 그리기 ( 율곡로3길 )
         MapPolyline polyline3 = new MapPolyline();
@@ -114,15 +134,25 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         polyline3.addPoint(MapPoint.mapPointWithGeoCoord(37.577511, 126.982449));
         polyline3.addPoint(MapPoint.mapPointWithGeoCoord(37.576800, 126.982575));
         polyline3.addPoint(MapPoint.mapPointWithGeoCoord(37.575929, 126.983001));
-
         // Polyline 지도에 올리기.
         mapView1.addPolyline(polyline3);
+
+        // marker3 추가하기 ( 율곡로3길 )
+        MapPoint MARKER_POINT3 = MapPoint.mapPointWithGeoCoord(37.579353, 126.982135);
+
+        MapPOIItem marker3 = new MapPOIItem();
+        marker3.setItemName("율곡로3길");
+        marker3.setTag(2);
+        marker3.setMapPoint(MARKER_POINT3);
+        marker3.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+        marker3.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+
+        mapView1.addPOIItem(marker3);
 
 
 
         return v;
     }
-
 
 
 

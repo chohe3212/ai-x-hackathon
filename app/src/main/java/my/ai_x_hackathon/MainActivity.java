@@ -13,16 +13,11 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
-import android.widget.TextView;
-
-import net.daum.mf.map.api.MapPoint;
-import net.daum.mf.map.api.MapReverseGeoCoder;
-import net.daum.mf.map.api.MapView;
 
 public class MainActivity extends AppCompatActivity {
 
     MapFragment mapFragment = new MapFragment();
-    RankFragment rankFragment = new RankFragment();
+    InfoFragment infoFragment = new InfoFragment();
     StoreFragment storeFragment = new StoreFragment();
 
     @Override
@@ -53,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.RankIcon:
-                    openFragment(rankFragment);
+                    openFragment(infoFragment);
                     break;
 
                 case R.id.MapIcon:

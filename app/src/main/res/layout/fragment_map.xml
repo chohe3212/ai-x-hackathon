@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="탐색중.."
-        android:textColor="#272727"
+        android:textColor="#8A272727"
         android:textSize="35sp"
         android:textStyle="bold" />
 

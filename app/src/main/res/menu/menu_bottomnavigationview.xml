@@ -15,8 +15,8 @@
         android:checked="true"/>
     <item
         android:id="@+id/RankIcon"
-        android:icon="@drawable/ranking"
-        android:title="Ranking"
+        android:icon="@drawable/information"
+        android:title="Information"
 />
 
 </menu>
