@@ -3,6 +3,7 @@ package my.ai_x_hackathon;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -30,6 +31,14 @@ import my.ai_x_hackathon.R;
 public class MapFragment extends Fragment implements MapView.MapViewEventListener, MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener{
 
     public TextView address_text;
+    public MapView mapView1 ;
+
+    MapFragment(AppCompatActivity e){
+        this.mapView1 = new MapView(e);
+    }
+
+    MapFragment(){
+    }
 
     // 커스텀 마커 풍선
     class CustomCalloutBalloonAdapter implements CalloutBalloonAdapter {
@@ -42,7 +51,7 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         @Override
         public View getCalloutBalloon(MapPOIItem poiItem) {
             ((TextView) mCalloutBalloon.findViewById(R.id.ball_tv_name)).setText(poiItem.getItemName());
-            ((TextView) mCalloutBalloon.findViewById(R.id.ball_tv_address)).setText("Custom CalloutBalloon");
+            ((TextView) mCalloutBalloon.findViewById(R.id.ball_tv_address)).setText("위험도 : " +poiItem.getTag());
             return (View)mCalloutBalloon;
         }
 
@@ -59,8 +68,6 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_map,container,false);
         address_text = (TextView) v.findViewById(R.id.map_textView);
-
-        MapView mapView1 = new MapView(this.getActivity());
 
         ViewGroup mapViewContainer = (ViewGroup) v.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView1);
@@ -83,6 +90,7 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         polyline1.addPoint(MapPoint.mapPointWithGeoCoord(37.580860,126.981644));
         polyline1.addPoint(MapPoint.mapPointWithGeoCoord(37.580576,126.981817));
         polyline1.addPoint(MapPoint.mapPointWithGeoCoord(37.579962,126.982267));
+
         // Polyline 지도에 올리기.
         mapView1.addPolyline(polyline1);
 
@@ -91,7 +99,7 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
 
         MapPOIItem marker1 = new MapPOIItem();
         marker1.setItemName("북촌로 5가길");
-        marker1.setTag(0);
+        marker1.setTag(4);
         marker1.setMapPoint(MARKER_POINT1);
         marker1.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
         marker1.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
@@ -115,7 +123,7 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
 
         MapPOIItem marker2 = new MapPOIItem();
         marker2.setItemName("계동길");
-        marker2.setTag(1);
+        marker2.setTag(5);
         marker2.setMapPoint(MARKER_POINT2);
         marker2.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
         marker2.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
@@ -142,7 +150,7 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
 
         MapPOIItem marker3 = new MapPOIItem();
         marker3.setItemName("율곡로3길");
-        marker3.setTag(2);
+        marker3.setTag(3);
         marker3.setMapPoint(MARKER_POINT3);
         marker3.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
         marker3.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
@@ -154,6 +162,12 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         return v;
     }
 
+    public void onClickButtonStoretoMap(double latitude,double longitude){
+        MapPoint MARKER_POINT_STORE = MapPoint.mapPointWithGeoCoord(latitude, longitude);
+        MapPOIItem marker = new MapPOIItem();
+        marker.setMapPoint(MARKER_POINT_STORE);
+        mapView1.addPOIItem(marker);
+    }
 
 
 

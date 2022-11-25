@@ -18,8 +18,9 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imageView_street"
             android:layout_width="96dp"
+            android:padding="10dp"
             android:layout_height="79dp"
             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
@@ -28,21 +29,15 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/text_info_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:textSize="10sp"
-                android:text="time" />
+
 
             <TextView
                 android:id="@+id/info_text_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
-                android:layout_weight="1"
                 android:text="주소"
+                android:paddingTop="10dp"
                 android:textColor="#232323"
                 android:textSize="15sp" />
 
@@ -51,9 +46,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
-                android:layout_weight="1"
-                android:gravity="center"
                 android:text="위험도"
+                android:paddingTop="6dp"
+                android:layout_marginStart="3dp"
                 android:textColor="#1C1C1C"
                 android:textSize="20sp"
                 android:textStyle="bold" />

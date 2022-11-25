@@ -4,10 +4,15 @@ public class InfoList {
     private String address;
     private String danger;
     private String Time;
+    private int image_street;
 
-    public InfoList(String address, String danger){
+    public InfoList(String address, String danger,int image){
         this.address = address;
-        this.danger = danger;}
+        this.danger = danger;
+        this.image_street = image;}
+
+
+
 
     public  String getAddress(){return address;}
 
@@ -19,11 +24,8 @@ public class InfoList {
 
     public void setDanger(String danger){this.danger = danger;}
 
-    public String getTime() {
-        return Time;
-    }
+    public int getImage_street(){return image_street;}
 
-    public void setTime(String time) {
-        Time = time;
-    }
+    public void setImage_street(int image_street){this.image_street = image_street;}
+
 }

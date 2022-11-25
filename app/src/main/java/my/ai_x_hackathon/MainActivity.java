@@ -16,7 +16,7 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
-    MapFragment mapFragment = new MapFragment();
+    MapFragment mapFragment;
     InfoFragment infoFragment = new InfoFragment();
     StoreFragment storeFragment = new StoreFragment();
 
@@ -25,14 +25,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mapFragment= new MapFragment(this);
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
         bottomNavigationView.setSelectedItemId(R.id.MapIcon);
-
-
-
-
     }
 
 

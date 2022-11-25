@@ -3,62 +3,92 @@ package my.ai_x_hackathon;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StoreFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class StoreFragment extends Fragment {
+import net.daum.mf.map.api.MapPOIItem;
+import net.daum.mf.map.api.MapPoint;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.util.ArrayList;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public StoreFragment() {
-        // Required empty public constructor
-    }
+public class StoreFragment extends Fragment{
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment StoreFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static StoreFragment newInstance(String param1, String param2) {
-        StoreFragment fragment = new StoreFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private ArrayList<my.ai_x_hackathon.StoreList> StoreList = new ArrayList<my.ai_x_hackathon.StoreList>();
+    private RecyclerView recyclerView;
+    StoreAdapter mAdapter;
+    private EditText SearchET;
+    public MapFragment mapFragment1;
+    ArrayList<StoreList> search_list = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+        // 수정필요!! (임의로 추가한거임. api에서 받아서 넣어야함)
+        StoreList.add(new StoreList("경복궁","궁궐","매일 09:00 - 17:00",R.drawable.k_1,R.drawable.k_2,R.drawable.k_3,37.579548,126.977047));
+        StoreList.add(new StoreList("국립민속박물관","박물관","매일 09:00 - 17:00",R.drawable.b_1,R.drawable.b_2,R.drawable.b_3,37.581841,126.979041));
+        StoreList.add(new StoreList("갤러리현대","갤러리,화랑","화~일 10:00 - 18:00",R.drawable.h_1,R.drawable.h_2,R.drawable.h_3,37.577272,126.979893));
+        StoreList.add(new StoreList("쌈지길","복합문화공간","매일 10:30 - 20:30",R.drawable.s_1,R.drawable.s_2,R.drawable.s_3,37.574164,126.984877));
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_store, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_store, container, false);
+        recyclerView = (RecyclerView) v.findViewById(R.id.store_recycle);
+        SearchET = (EditText) v.findViewById(R.id.edit_store_Search);
+        mapFragment1 = new MapFragment();
+        SearchET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String searchText = SearchET.getText().toString();
+                //searchFilter(searchText);
+                search_list.clear();
+
+                if(searchText.equals("")) {
+                    mAdapter.setItems(StoreList);
+                }else {
+                    for(int a=0; a< StoreList.size(); a++) {
+                        if (StoreList.get(a).getStore_address().toLowerCase().contains(searchText.toLowerCase())) {
+                            search_list.add(StoreList.get(a));
+                        }
+                        mAdapter.setItems(search_list);
+                    }
+                }
+
+            }
+        });
+
+        mAdapter = new StoreAdapter(StoreList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+
+        return v;
     }
+
+
 }
