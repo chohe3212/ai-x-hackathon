@@ -26,4 +26,4 @@
 
    <img src="https://user-images.githubusercontent.com/89963228/236508727-08fef86f-2187-4004-ac94-bc4e6493906e.png" height="400px" width="200px">    <img src="https://user-images.githubusercontent.com/89963228/236508704-056d3d06-9d73-4eb1-bb20-161201b59e83.png" height="400px" width="200px">  <img src="https://user-images.githubusercontent.com/89963228/236508741-55ef7a79-2bd4-4ec7-bd21-21e9b10f58db.png" height="400px" width="200px"> 
     
-한국정보사회진흥, 인천재능대학교 주최
+한국정보사회진흥원, 인천재능대학교 주최
