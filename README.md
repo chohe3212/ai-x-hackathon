@@ -3,7 +3,7 @@
 
 * 주제 선정 배경
 
-대형 행사가 많아진만큼 군중 밀집 안전에 대한 관심이 높아지고 있는 추세
+대형 행사가 많아진만큼 군중 밀집 안전에 대한 관심이 높아지고 있는 추세 </br>
 이를 해결하기 위해 유동인구 밀집 현상 완화를 위한 유동인구 밀집도 예상 어플인 “Where We Go?”를 기획 및 제작함
 
 * * *
@@ -22,7 +22,7 @@
 
 * * *
 
-- 스크린샷
+* 스크린샷
 
    <img src="https://user-images.githubusercontent.com/89963228/236508727-08fef86f-2187-4004-ac94-bc4e6493906e.png" height="400px" width="200px">    <img src="https://user-images.githubusercontent.com/89963228/236508704-056d3d06-9d73-4eb1-bb20-161201b59e83.png" height="400px" width="200px">  <img src="https://user-images.githubusercontent.com/89963228/236508741-55ef7a79-2bd4-4ec7-bd21-21e9b10f58db.png" height="400px" width="200px"> 
     
